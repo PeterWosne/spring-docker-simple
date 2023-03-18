@@ -5,9 +5,13 @@ mvnw package && java -jar target/spring-docker-simple-0.0.1-SNAPSHOT.jar  упа
 в корне проекта создать Dockerfile(содержит инструкции для сборки образа)
 
 FROM openjdk:17-alpine                                                    образ создается на основе alpine linux и openjdk17
+
 ARG JAR_FILE=target/spring-docker-simple-0.0.1-SNAPSHOT.jar                            переменная содержит путь к jar-архиву
+
 WORKDIR opt/app                                                               назначаем рабочую директорию и переходим в нее
+
 COPY ${JAR_FILE} app.jar                                             копируем jar-файл в директорию и задаем ему имя app.jar
+
 ENTRYPOINT ["java","-jar","app.jar"]                                                                               запускаем
 
 docker build -t spring-docker-simple:0.0.1 .   собираем образ. Точка указывает на расположение Dockerfile(текущая директория)
